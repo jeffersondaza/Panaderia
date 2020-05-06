@@ -21,106 +21,100 @@ import java.util.logging.Logger;
  */
 public class ProductoDAO implements ProductoDTO {
 
-    private final ConexionMySQL mySQL;
+	private final ConexionMySQL mySQL;
 
-    public ProductoDAO() {
-        this.mySQL = new ConexionMySQL("127.0.0.1", 3306, "panaderia", "persona_app", "password");
-    }
+	public ProductoDAO() {
+		this.mySQL = new ConexionMySQL("127.0.0.1", 3306, "panaderia", "persona_app", "password");
+	}
 
-    public boolean registrarProducto(Producto producto) {
+	public boolean registrarProducto(Producto producto) {
 
-        if (producto != null) {
-            String sql = "INSERT INTO panaderia.productos VALUES(";
-            sql += "\"" +producto.getNombre() + "\""+ ", ";
-            sql += "\"" +producto.getMarca() + "\""+ ", ";
-            sql += "\"" + producto.getFecha() + "\"" + ", ";
-            sql += producto.getCosto()  + ", ";
-            sql += producto.getCantidad();
+		if (producto != null) {
+			String sql = "INSERT INTO panaderia.productos VALUES(";
+			sql += "\"" + producto.getNombre() + "\"" + ", ";
+			sql += "\"" + producto.getMarca() + "\"" + ", ";
+			sql += "\"" + producto.getFecha() + "\"" + ", ";
+			sql += producto.getCosto() + ", ";
+			sql += producto.getCantidad();
 
-            sql += ");";
-            System.out.println(sql);
-            if (this.mySQL.conectar()) {
-                Connection con = this.mySQL.getCon();
-                try {
-                    Statement stm = con.createStatement();
-                    stm.execute(sql);
-                    stm.close();
-                    con.close();
-                    return true;
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+			sql += ");";
+			System.out.println(sql);
+			if (this.mySQL.conectar()) {
+				Connection con = this.mySQL.getCon();
+				try {
+					Statement stm = con.createStatement();
+					stm.execute(sql);
+					stm.close();
+					con.close();
+					return true;
+				} catch (SQLException ex) {
+					System.out.println(ex.getMessage());
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 
-    }
+	}
 
-    public boolean actualizarProducto(Producto producto) {
-        if (producto != null) {
-            String sql = "UPDATE panaderia.productos SET marca=";
-            sql += "\""+producto.getMarca() +"\""+ ", ";
-            sql += "fecha_vencimiento= " + "\"" + producto.getFecha() + "\"" + ", ";
-            sql += "costo= " + producto.getCosto() + ", ";
-            sql += "cantidad= " + producto.getCantidad();
-            sql += " WHERE nombre=";
-            sql += "\""+producto.getNombre()+"\"";
-            sql += ";";
-            System.out.println(sql);
-            if (this.mySQL.conectar()) {
-                Connection con = this.mySQL.getCon();
-                try {
-                    Statement stm = con.createStatement();
-                    stm.execute(sql);
-                    stm.close();
-                    con.close();
-                    return true;
-                } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+	public boolean actualizarProducto(Producto producto) {
+		if (producto != null) {
+			String sql = "UPDATE panaderia.productos SET marca=";
+			sql += "\"" + producto.getMarca() + "\"" + ", ";
+			sql += "fecha_vencimiento= " + "\"" + producto.getFecha() + "\"" + ", ";
+			sql += "costo= " + producto.getCosto() + ", ";
+			sql += "cantidad= " + producto.getCantidad();
+			sql += " WHERE nombre=";
+			sql += "\"" + producto.getNombre() + "\"";
+			sql += ";";
+			System.out.println(sql);
+			if (this.mySQL.conectar()) {
+				Connection con = this.mySQL.getCon();
+				try {
+					Statement stm = con.createStatement();
+					stm.execute(sql);
+					stm.close();
+					con.close();
+					return true;
+				} catch (SQLException ex) {
+					System.out.println(ex.getMessage());
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
-    public boolean editar(Producto persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	public boolean editar(Producto persona) {
+		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+																		// Tools | Templates.
+	}
 
-    public boolean eliminar(String nombre) {
-        String sql = "DELETE FROM panaderia.productos WHERE "
-                + "nombre = " +"\""+ nombre + "\""+";";
-        System.out.println(sql);
+	public boolean eliminar(String nombre) {
+		String sql = "DELETE FROM panaderia.productos WHERE " + "nombre = " + "\"" + nombre + "\"" + ";";
+		System.out.println(sql);
 
-        if (this.mySQL.conectar()) {
-            Connection con = this.mySQL.getCon();
-            try {
-                Statement stm = con.createStatement();
-                stm.execute(sql);
-                stm.close();
-                con.close();
-                return true;
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
- 
-
-
-
-
+		if (this.mySQL.conectar()) {
+			Connection con = this.mySQL.getCon();
+			try {
+				Statement stm = con.createStatement();
+				stm.execute(sql);
+				stm.close();
+				con.close();
+				return true;
+			} catch (SQLException ex) {
+				System.out.println(ex.getMessage());
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 }

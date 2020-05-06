@@ -13,8 +13,10 @@ import java.util.List;
  * @author 305
  */
 public interface ProductoDTO {
-    public boolean registrarProducto(Producto persona);
-    public boolean editar(Producto persona);
-    public boolean eliminar(String nombre);
-  
+	public boolean registrarProducto(Producto persona);
+
+	public boolean editar(Producto persona);
+
+	public boolean eliminar(String nombre);
+
 }
